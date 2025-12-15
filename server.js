@@ -1,36 +1,20 @@
 const express = require("express");
-const cors = require("cors");
-
 const app = express();
 const port = process.env.PORT || 3000;
 
-/* =======================
-   Middlewares
-======================= */
-app.use(cors());
+// Middleware
 app.use(express.json());
 
-/* =======================
-   Routes Import
-======================= */
-const authRoutes = require("./src/src/routes/auth");
-const bharatRoutes = require("./src/src/routes/bharat");
-const nimbusRoutes = require("./src/src/routes/nimbus");
+// Routes
+const authRoutes = require("./src/routes/auth");
+app.use("/auth", authRoutes);
 
-/* =======================
-   Routes Use
-======================= */
+// Test route
 app.get("/", (req, res) => {
   res.send("MS Logistic Backend Running");
 });
 
-app.use("/auth", authRoutes);
-app.use("/bharat", bharatRoutes);
-app.use("/nimbus", nimbusRoutes);
-
-/* =======================
-   Start Server
-======================= */
+// Start server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
